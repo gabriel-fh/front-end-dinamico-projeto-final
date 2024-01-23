@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("../image/night-sky-1920x1080-v0-6xpstvrevte81.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; 
+  min-height: 100vh;
+}
+
+.task_bg{
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgb(118, 117, 117);
+}
