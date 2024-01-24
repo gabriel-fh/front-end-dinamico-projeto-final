@@ -19,12 +19,12 @@ class Task {
 
     // Construtor
 
-    constructor(title, category, time, completed) {
+    constructor(title, category, time) {
         this.#id = Task.count++;
         this.title = title;
         this.category = category;
         this.time = time;
-        this.completed = completed;
+        this.completed = false;
     }
 
     // Getters e Setters
@@ -38,15 +38,16 @@ class Task {
     };
 
     set title(title) {
-        Task.validateTitle(title);
+        Task.validateField(title, 'Título');
         this.#title = title;
     };
-
+    
     get category() {
         return this.#category;
     };
-
+    
     set category(category) {
+        Task.validateField(category, 'Cateoria');
         this.#category = category
     };
 
@@ -69,12 +70,12 @@ class Task {
 
     // Metódos
 
-    static validateTitle(title) {
-        if (!title || title.trim() === '') {
-            throw new ModelException('O campo "Título" é obrigatório!');
+    static validateField(content, field) {
+        if (!content || content.trim() === '') {
+            throw new ModelException(`O campo "${field}" é obrigatório!`);
         }
-        if (title.length < 3) {
-            throw new ModelException('O campo "Título" deve possuir no mínimo 3 caracteres!');
+        if (content.length < 3) {
+            throw new ModelException(`O campo "${field}" deve possuir no mínimo 3 caracteres!`);
         }
     };
 
@@ -104,7 +105,6 @@ class Task {
 class ToDoList {
 
     // Atributo
-
     #tasks = [];
 
     // Getter
@@ -117,7 +117,6 @@ class ToDoList {
         if (!(task instanceof Task)) {
             throw new ModelException('É permitido adicionar apenas tarefas à lista!');
         }
-
         this.#tasks.push(task);
     };
 
@@ -133,10 +132,31 @@ class ToDoList {
 
     completeTask(isCompleted, id) {
         const index = this.#findTask(id);
-        const task = this.#tasks.splice(index, 1)[0];
-        task.completed = isCompleted;
-        this.#tasks.push(task);
+    
+        if (index !== -1) {
+            const task = this.#tasks.splice(index, 1)[0];
+    
+            if (isCompleted) {
+                this.#tasks.push(task);
+            } else {
+                const lastIncompleteIndex = this.#tasks.reduceRight((acc, task, currentIndex) => {
+                    if (!task.completed && acc === -1) {
+                        acc = currentIndex;
+                    }
+                    return acc;
+                }, -1);
+    
+                if (lastIncompleteIndex !== -1) {
+                    this.#tasks.splice(lastIncompleteIndex + 1, 0, task);
+                } else {
+                    this.#tasks.unshift(task);
+                }
+            }
+    
+            task.completed = isCompleted;
+        }
     };
+    
 
     updateTask(id, title, category, time) {
         for (const task of this.#tasks) {
