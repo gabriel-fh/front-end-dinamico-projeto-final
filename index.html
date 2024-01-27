@@ -25,11 +25,11 @@
         <div class="col-9">
           <span class="my-day">Meu dia</span>
           <br />
-          <span class="my-day">11:27</span>
+          <span class="my-day hours"></span>
           <br />
-          <span>Sexta-feira, 25 de fevereiro</span>
+          <span class="date">Sexta-feira, 25 de fevereiro</span>
         </div>
-        <div class="col-3 flex-center">
+        <div class="col-3 flex">
           <button
             class="add-task-btn"
             type="button"
@@ -57,14 +57,17 @@
               <div class="mb-2">
                 <label for="inputTaskTitle" class="form-label">Título</label>
                 <input type="text" class="form-control" id="inputTaskTitle" placeholder="Insira o título">
+                <span class="title error d-none ">O campo "Título" é obrigatório!</span>
               </div>
               <div class="mb-2">
                 <label for="inputCategory" class="form-label">Categoria</label>
                 <input type="text" class="form-control" id="inputCategory" placeholder="Insira a categoria">
+                <span class="category error d-none">O campo "Categoria" é obrigatório!</span>
               </div>
               <div>
                 <label for="inputTime" class="form-label">Hora</label>
                 <input type="time" class="form-control" id="inputTime">
+                <span class="time error d-none">Formato de hora inválido! Use "hh:mm"</span>
               </div>
             </div>
             <div class="modal-footer">
