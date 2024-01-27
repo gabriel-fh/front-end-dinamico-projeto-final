@@ -41,7 +41,7 @@ class Task {
     };
     
     set category(category) {
-        Task.validateField(category, 'Cateoria');
+        Task.validateField(category, 'Categoria');
         this.#category = category
     };
 
@@ -77,7 +77,7 @@ class Task {
         if (time) {
             const splitTime = time.split(':');
             if (splitTime.length !== 2 || isNaN(parseInt(splitTime[0])) || isNaN(parseInt(splitTime[1]))) {
-                throw new ModelException('Formato de hora inválido! Use "hh:mm"');
+                throw new ModelException(s);
             }
 
             const hours = parseInt(splitTime[0], 10);

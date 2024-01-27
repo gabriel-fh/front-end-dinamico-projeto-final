@@ -1,5 +1,5 @@
 const API_URL = 'https://crudcrud.com/api/';
-const API_KEY = 'f321af39f5ea4ffb88b8de6b99add7e3';
+const API_KEY = '2ce3f147f736489b93006aed5c1d9b17';
 
 const sendData = async (task) => {
     try {
@@ -33,7 +33,7 @@ const updateData = async (id, task) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(task)
+            body: JSON.stringify(task),
         })
     } catch (err) {
         throw err

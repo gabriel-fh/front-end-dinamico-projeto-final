@@ -24,10 +24,10 @@ body {
   cursor: pointer;
 }
 
-.flex-center {
+.flex {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
 }
 
 .task-bg,
@@ -146,4 +146,11 @@ body {
   border: 1px solid #212529;
   padding: .2rem .6rem;
   border-radius: .2rem;
+}
+
+.error {
+  font-size: .8rem;
+  color: #f00;
+  letter-spacing: 0.03rem;
+  margin-left: .2rem;
 }
