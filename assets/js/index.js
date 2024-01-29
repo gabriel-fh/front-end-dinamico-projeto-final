@@ -159,13 +159,14 @@ const updateTask = (taskId) => {
 }
 
 // Marca uma tarefa como concluida
+// Enfrentando Erro de CORS quando marca como concluida
 const completeTask = (checked, id) => {
     const task = tasksArr.find(item => item._id === id)
     if (task) {
         task.completed = checked;
-        // updateData(id, task)
-        //     .then(async () => await getTasks())
-        //     .catch(err => console.error('Erro ao atualizar tarefa: ' + err));
+        updateData(id, task)
+            .then(async () => await getTasks())
+            .catch(err => console.error('Erro ao atualizar tarefa: ' + err));
         console.log(task)
     }
 }
@@ -197,13 +198,11 @@ const getDateTime = () => {
     document.querySelector('.hours').textContent = time;
     document.querySelector('.date').textContent = date.charAt(0).toUpperCase() + date.substring(1);
 
-    
+     // Chama a função novamente antes da próxima renderização do navegador
+    requestAnimationFrame(getDateTime);
 }
 
-// Verifica a cada 1ms se a data ou a hora mudaram
-setInterval(() => {
-    getDateTime();
-}, 1000)
+getDateTime();
 
 
 // Limpa os inputs do modal
