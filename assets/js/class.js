@@ -77,16 +77,16 @@ class Task {
         if (time) {
             const splitTime = time.split(':');
             if (splitTime.length !== 2 || isNaN(parseInt(splitTime[0])) || isNaN(parseInt(splitTime[1]))) {
-                throw new ModelException(s);
+                throw new ModelException("Formato de hora inválido. Certifique-se de que a hora está no formato HH:MM.");
             }
-
+        
             const hours = parseInt(splitTime[0], 10);
             const min = parseInt(splitTime[1], 10);
-
+        
             if (hours < 0 || hours > 23 || min < 0 || min > 59) {
                 throw new ModelException('Hora fora do intervalo válido! Use: (00:00 - 23:59)');
             }
-        }
+        }        
     };
 
     static markAsCompleted(completed) {
